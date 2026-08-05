@@ -1,23 +1,42 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class NumberGuessingGame {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        int randomNum = (int) (Math.random() * 50) + 1;
-        System.out.println(randomNum);
+        int randomNum = 0;
         int guessNumber;
         int attempts = 0;
-        while (true) {
-            System.out.println("Which level would you like to play?");
-            System.out.println("1. Easy");
-            System.out.println("2. Medium");
-            System.out.println("3. Hard");
-            System.out.println("4. Quit");
+        int choice = 0;
 
-            int choice = input.nextInt();
+        while (true) {
+            boolean validChoice = false;
+
+            while (!validChoice) {
+                try {
+                    System.out.println("Which level would you like to play?");
+                    System.out.println("1. Easy");
+                    System.out.println("2. Medium");
+                    System.out.println("3. Hard");
+                    System.out.println("4. Quit");
+                    System.out.println("Please enter a number between 1 and 4");
+                    choice = input.nextInt();
+                    if  (choice >= 1 || choice <= 4) {
+                        validChoice = true;
+
+                    } else {
+                        System.out.println("Invalid Input. Please enter a number between 1 and 4.");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid Input. Please enter a number between 1 and 4.");
+                    input.nextLine();
+                }
+            }
+
 
             switch (choice) {
                 case 1:
+                    randomNum = (int) (Math.random() * 50) + 1;
                     while (attempts < 4) {
                         System.out.println("Guess a number between 1 and 50");
                         try {
@@ -32,7 +51,7 @@ public class NumberGuessingGame {
                                 System.out.println("Lower");
                             } else {
                                 System.out.println("You Win");
-                                attempts = 5;
+                                break;
                             }
 
                         } catch (Exception e) {
@@ -48,6 +67,7 @@ public class NumberGuessingGame {
                     }
                     break;
                 case 2:
+                    randomNum = (int) (Math.random() * 100) + 1;
                     while (attempts < 4) {
                         System.out.println("Guess a number between 1 and 100");
                         try {
@@ -62,7 +82,7 @@ public class NumberGuessingGame {
                                 System.out.println("Lower");
                             } else {
                                 System.out.println("You Win");
-                                attempts = 5;
+                                break;
                             }
 
                         } catch (Exception e) {
@@ -77,7 +97,7 @@ public class NumberGuessingGame {
                     }
                     break;
                 case 3:
-
+                    randomNum = (int) (Math.random() * 2000) + 1;
                     while (attempts < 4) {
                         System.out.println("Guess a number between 1 and 2000");
                         try {
@@ -92,7 +112,7 @@ public class NumberGuessingGame {
                                 System.out.println("Lower");
                             } else {
                                 System.out.println("You Win");
-                                attempts = 5;
+                                break;
                             }
                         } catch (Exception e) {
                             System.out.println("Invalid input. Try again");
